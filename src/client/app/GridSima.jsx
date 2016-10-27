@@ -4,10 +4,6 @@ import AddHero from './AddHero.jsx';
 
 let eroes = [
 	{key:1,nome:'Emphysema', classe:'Mago', razza:'Gnomo', attacco:8, difesa:4, vita:8}
-	,{key:2,nome:'Red Sara', classe:'Guerriero', razza:'Elfo', attacco:7, difesa:9, vita:10}
-	,{key:3,nome:'Papera', classe:'Guaritore', razza:'Umano', attacco:2, difesa:2, vita:6}
-	,{key:4,nome:'Ottava', classe:'Mago', razza:'Nano', attacco:12, difesa:3, vita:4}
-	,{key:5,nome:'Bix', classe:'Ladro', razza:'Umano', attacco:10, difesa:3, vita:7}
 ];
 
 const GridSima = React.createClass({
@@ -15,8 +11,8 @@ const GridSima = React.createClass({
 	getInitialState: function(){
 		return {
 			list: eroes,
-			showAdd: false,
-			newHero: {}
+			listFiltered: eroes,
+			showAdd: false
 		};
 	},
 
@@ -30,10 +26,11 @@ const GridSima = React.createClass({
 			}
 		});
 		eroes = eroesNew;
-		/*this.setState({list: eroesNew});*/
+		this.setState({list: eroesNew});
+		this.setState({listFiltered: eroesNew});
 	},
 
-	addHero(){
+	toggleHero(){
 		if(this.state.showAdd)
 			this.setState({showAdd: false});
 		else
@@ -41,48 +38,82 @@ const GridSima = React.createClass({
 
 	},
 
-	creaHero(hero){
-		console.log('creaHero(hero)', hero);
+	addHero(hero){
+		console.log(hero)
 		let newHeroes = this.state.list;
 		hero.key = newHeroes[newHeroes.length-1].key+1;
 		newHeroes.push(hero);
 
 		this.setState({list:newHeroes});
-		this.setState({newHero:{}});
+		this.setState({listFiltered:newHeroes});
 		this.setState({showAdd:false});
 
-		/*let newHeroes = this.state.list;
-		let hero = this.state.newHero;
+	},
 
-		hero.attacco = Math.floor((Math.random() * 10) + 1);
-		hero.difesa = Math.floor((Math.random() * 10) + 1);
-		hero.vita = Math.floor((Math.random() * 10) + 1);
-		hero.key = newHeroes[newHeroes.length-1].key+1;
-		newHeroes.push(hero);
+	filterByProp(type, searchWord){
 
-		this.setState({list:newHeroes});
-		this.setState({newHero:{}});
-		this.setState({showAdd:false});*/
+		if(!searchWord){
+			this.setState({listFiltered:this.state.list});
+			return false;
+		}
+
+		let _this = this;
+		let filtered = this.state.list.filter(function(item){
+			switch(type){
+				case 'nome':
+					if(item.nome.toUpperCase().indexOf(searchWord.toUpperCase()) !== -1){
+						return item;
+					}
+					break;
+				case 'classe':
+					if(item.classe.toUpperCase().indexOf(searchWord.toUpperCase()) !== -1){
+						return item;
+					}
+					break;
+				case 'razza':
+					if(item.razza.toUpperCase().indexOf(searchWord.toUpperCase()) !== -1){
+						return item;
+					}
+					break;
+				case 'attacco':
+					if(item.attacco == _this.refs.attacco.value){
+						return item;
+					}
+					break;
+				case 'difesa':
+					if(item.difesa == _this.refs.difesa.value){
+						return item;
+					}
+					break;
+				case 'vita':
+					if(item.vita == _this.refs.vita.value){
+						return item;
+					}
+					break;
+			}
+		});
+
+		this.setState({listFiltered:filtered});
 	},
 
 	render : function(){
 		let _this = this;
 		return (<div className="text-center">
-				<button className="button radius default" onClick={this.addHero}>Crea</button>
+				<button className="button radius default" onClick={this.toggleHero}>Crea</button>
 				<AddHero {...this.state} show={this.state.showAdd}
-					creaHero={this.creaHero} />
+					addHero={this.addHero} />
 				<table>
 					<tbody>
 						<tr>
-							<th>Nome</th>
-							<th>Classe</th>
-							<th>Razza</th>
-							<th>Attacco</th>
-							<th>Difesa</th>
-							<th>Vita</th>
+							<th>Nome <input ref="nome" type="text" 		onChange={() => _this.filterByProp('nome', this.refs.nome.value)} /></th>
+							<th>Classe <input ref="classe" type="text" 	onChange={() => _this.filterByProp('classe', this.refs.classe.value)} /></th>
+							<th>Razza <input ref="razza" type="text" 	onChange={() => _this.filterByProp('razza', this.refs.razza.value)} /></th>
+							<th>Attacco <input ref="attacco" type="text" onChange={() => _this.filterByProp('attacco', this.refs.attacco.value)} /></th>
+							<th>Difesa <input ref="difesa" type="text"	onChange={() => _this.filterByProp('difesa', this.refs.difesa.value)} /></th>
+							<th>Vita <input ref="vita" type="text" 		onChange={() => _this.filterByProp('vita', this.refs.vita.value)} /></th>
 							<th>Azioni</th>
 						</tr>
-						{this.state.list.map(function(item){
+						{this.state.listFiltered.map(function(item){
 							return (
 								<tr key={item.key}>
 									<td>{item.nome}</td>

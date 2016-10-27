@@ -22005,7 +22005,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var eroes = [{ key: 1, nome: 'Emphysema', classe: 'Mago', razza: 'Gnomo', attacco: 8, difesa: 4, vita: 8 }, { key: 2, nome: 'Red Sara', classe: 'Guerriero', razza: 'Elfo', attacco: 7, difesa: 9, vita: 10 }, { key: 3, nome: 'Papera', classe: 'Guaritore', razza: 'Umano', attacco: 2, difesa: 2, vita: 6 }, { key: 4, nome: 'Ottava', classe: 'Mago', razza: 'Nano', attacco: 12, difesa: 3, vita: 4 }, { key: 5, nome: 'Bix', classe: 'Ladro', razza: 'Umano', attacco: 10, difesa: 3, vita: 7 }];
+	var eroes = [{ key: 1, nome: 'Emphysema', classe: 'Mago', razza: 'Gnomo', attacco: 8, difesa: 4, vita: 8 }];
 	
 	var GridSima = _react2.default.createClass({
 		displayName: 'GridSima',
@@ -22014,8 +22014,8 @@
 		getInitialState: function getInitialState() {
 			return {
 				list: eroes,
-				showAdd: false,
-				newHero: {}
+				listFiltered: eroes,
+				showAdd: false
 			};
 		},
 	
@@ -22028,46 +22028,83 @@
 				}
 			});
 			eroes = eroesNew;
-			/*this.setState({list: eroesNew});*/
+			this.setState({ list: eroesNew });
+			this.setState({ listFiltered: eroesNew });
 		},
-		addHero: function addHero() {
+		toggleHero: function toggleHero() {
 			if (this.state.showAdd) this.setState({ showAdd: false });else this.setState({ showAdd: true });
 		},
-		creaHero: function creaHero(hero) {
-			console.log('creaHero(hero)', hero);
+		addHero: function addHero(hero) {
+			console.log(hero);
 			var newHeroes = this.state.list;
 			hero.key = newHeroes[newHeroes.length - 1].key + 1;
 			newHeroes.push(hero);
 	
 			this.setState({ list: newHeroes });
-			this.setState({ newHero: {} });
+			this.setState({ listFiltered: newHeroes });
 			this.setState({ showAdd: false });
+		},
+		filterByProp: function filterByProp(type, searchWord) {
 	
-			/*let newHeroes = this.state.list;
-	  let hero = this.state.newHero;
-	  	hero.attacco = Math.floor((Math.random() * 10) + 1);
-	  hero.difesa = Math.floor((Math.random() * 10) + 1);
-	  hero.vita = Math.floor((Math.random() * 10) + 1);
-	  hero.key = newHeroes[newHeroes.length-1].key+1;
-	  newHeroes.push(hero);
-	  	this.setState({list:newHeroes});
-	  this.setState({newHero:{}});
-	  this.setState({showAdd:false});*/
+			if (!searchWord) {
+				this.setState({ listFiltered: this.state.list });
+				return false;
+			}
+	
+			var _this = this;
+			var filtered = this.state.list.filter(function (item) {
+				switch (type) {
+					case 'nome':
+						if (item.nome.toUpperCase().indexOf(searchWord.toUpperCase()) !== -1) {
+							return item;
+						}
+						break;
+					case 'classe':
+						if (item.classe.toUpperCase().indexOf(searchWord.toUpperCase()) !== -1) {
+							return item;
+						}
+						break;
+					case 'razza':
+						if (item.razza.toUpperCase().indexOf(searchWord.toUpperCase()) !== -1) {
+							return item;
+						}
+						break;
+					case 'attacco':
+						if (item.attacco == _this.refs.attacco.value) {
+							return item;
+						}
+						break;
+					case 'difesa':
+						if (item.difesa == _this.refs.difesa.value) {
+							return item;
+						}
+						break;
+					case 'vita':
+						if (item.vita == _this.refs.vita.value) {
+							return item;
+						}
+						break;
+				}
+			});
+	
+			this.setState({ listFiltered: filtered });
 		},
 	
 	
 		render: function render() {
+			var _this2 = this;
+	
 			var _this = this;
 			return _react2.default.createElement(
 				'div',
 				{ className: 'text-center' },
 				_react2.default.createElement(
 					'button',
-					{ className: 'button radius default', onClick: this.addHero },
+					{ className: 'button radius default', onClick: this.toggleHero },
 					'Crea'
 				),
 				_react2.default.createElement(_AddHero2.default, _extends({}, this.state, { show: this.state.showAdd,
-					creaHero: this.creaHero })),
+					addHero: this.addHero })),
 				_react2.default.createElement(
 					'table',
 					null,
@@ -22080,32 +22117,50 @@
 							_react2.default.createElement(
 								'th',
 								null,
-								'Nome'
+								'Nome ',
+								_react2.default.createElement('input', { ref: 'nome', type: 'text', onChange: function onChange() {
+										return _this.filterByProp('nome', _this2.refs.nome.value);
+									} })
 							),
 							_react2.default.createElement(
 								'th',
 								null,
-								'Classe'
+								'Classe ',
+								_react2.default.createElement('input', { ref: 'classe', type: 'text', onChange: function onChange() {
+										return _this.filterByProp('classe', _this2.refs.classe.value);
+									} })
 							),
 							_react2.default.createElement(
 								'th',
 								null,
-								'Razza'
+								'Razza ',
+								_react2.default.createElement('input', { ref: 'razza', type: 'text', onChange: function onChange() {
+										return _this.filterByProp('razza', _this2.refs.razza.value);
+									} })
 							),
 							_react2.default.createElement(
 								'th',
 								null,
-								'Attacco'
+								'Attacco ',
+								_react2.default.createElement('input', { ref: 'attacco', type: 'text', onChange: function onChange() {
+										return _this.filterByProp('attacco', _this2.refs.attacco.value);
+									} })
 							),
 							_react2.default.createElement(
 								'th',
 								null,
-								'Difesa'
+								'Difesa ',
+								_react2.default.createElement('input', { ref: 'difesa', type: 'text', onChange: function onChange() {
+										return _this.filterByProp('difesa', _this2.refs.difesa.value);
+									} })
 							),
 							_react2.default.createElement(
 								'th',
 								null,
-								'Vita'
+								'Vita ',
+								_react2.default.createElement('input', { ref: 'vita', type: 'text', onChange: function onChange() {
+										return _this.filterByProp('vita', _this2.refs.vita.value);
+									} })
 							),
 							_react2.default.createElement(
 								'th',
@@ -22113,7 +22168,7 @@
 								'Azioni'
 							)
 						),
-						this.state.list.map(function (item) {
+						this.state.listFiltered.map(function (item) {
 							return _react2.default.createElement(
 								'tr',
 								{ key: item.key },
@@ -22203,17 +22258,14 @@
 		function AddHero(props) {
 			_classCallCheck(this, AddHero);
 	
-			var _this = _possibleConstructorReturn(this, (AddHero.__proto__ || Object.getPrototypeOf(AddHero)).call(this, props));
-	
-			_this.creaHero = _this.creaHero.bind(_this);
-			return _this;
+			return _possibleConstructorReturn(this, (AddHero.__proto__ || Object.getPrototypeOf(AddHero)).call(this, props));
+			/*this.addHero = this.addHero.bind(this);*/
 		}
 	
 		_createClass(AddHero, [{
-			key: 'creaHero',
-			value: function creaHero() {
+			key: 'addHero',
+			value: function addHero() {
 	
-				console.log(this.refs);
 				var hero = {
 					nome: this.refs.nome.value,
 					razza: this.refs.razza.value,
@@ -22223,7 +22275,7 @@
 					vita: Math.floor(Math.random() * 10 + 1)
 				};
 	
-				this.props.creaHero(hero);
+				this.props.addHero(hero);
 				this.refs.nome.value = '';
 				this.refs.razza.value = '';
 				this.refs.classe.value = '';
@@ -22299,7 +22351,7 @@
 									{ colSpan: '2' },
 									_react2.default.createElement(
 										'button',
-										{ className: 'button round success small', onClick: this.creaHero },
+										{ className: 'button round success small', onClick: this.addHero.bind(this) },
 										'Crea'
 									)
 								)

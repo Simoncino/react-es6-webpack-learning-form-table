@@ -4,12 +4,11 @@ class AddHero extends React.Component {
 
 	constructor(props){
 		super(props);
-		this.creaHero = this.creaHero.bind(this);
+		/*this.addHero = this.addHero.bind(this);*/
 	}
 
-	creaHero(){
+	addHero(){
 
-		console.log(this.refs)
 		let hero = {
 			nome : this.refs.nome.value,
 			razza : this.refs.razza.value,
@@ -19,7 +18,7 @@ class AddHero extends React.Component {
 			vita : Math.floor((Math.random() * 10) + 1)
 		}
 
-		this.props.creaHero(hero);
+		this.props.addHero(hero);
 		this.refs.nome.value = '';
 		this.refs.razza.value = '';
 		this.refs.classe.value = '';
@@ -48,7 +47,7 @@ class AddHero extends React.Component {
 					</tr>
 					<tr>
 						<td colSpan="2">
-							<button className="button round success small" onClick={this.creaHero}>Crea</button>
+							<button className="button round success small" onClick={this.addHero.bind(this)}>Crea</button>
 						</td>
 					</tr>
 					</tbody>
