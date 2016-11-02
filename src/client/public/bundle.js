@@ -22037,7 +22037,11 @@
 		addHero: function addHero(hero) {
 			console.log(hero);
 			var newHeroes = this.state.list;
-			hero.key = newHeroes[newHeroes.length - 1].key + 1;
+			if (this.state.list && this.state.list.length) {
+				hero.key = newHeroes[newHeroes.length - 1].key + 1;
+			} else {
+				hero.key = 1;
+			}
 			newHeroes.push(hero);
 	
 			this.setState({ list: newHeroes });
