@@ -13,9 +13,9 @@ class AddHero extends React.Component {
 			nome : this.refs.nome.value,
 			razza : this.refs.razza.value,
 			classe : this.refs.classe.value,
-			attacco : Math.floor((Math.random() * 10) + 1),
-			difesa : Math.floor((Math.random() * 10) + 1),
-			vita : Math.floor((Math.random() * 10) + 1)
+			attacco : Math.floor((Math.random() * 6) + 1) + Math.floor((Math.random() * 6) + 1),
+			difesa : Math.floor((Math.random() * 6) + 1) + Math.floor((Math.random() * 6) + 1),
+			vita : Math.floor((Math.random() * 6) + 1) + Math.floor((Math.random() * 6) + 1)
 		}
 
 		this.props.addHero(hero);
@@ -31,6 +31,7 @@ class AddHero extends React.Component {
 		let displayNone = {display:'none', padding:'1em'};
 		return (
 			<div style={this.props.show?displayBlock:displayNone}>
+			<h4>Personaggio</h4>
 				<table style={styleTable}>
 					<tbody>
 					<tr>

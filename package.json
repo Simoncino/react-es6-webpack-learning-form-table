@@ -4,11 +4,16 @@
   "description": "Trying to create a grid",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -d --progress --watch",
+    "start": "nodemon server.js"
   },
   "author": "Il Sima",
   "license": "ISC",
   "dependencies": {
+    "hapi": "^15.2.0",
+    "inert": "^4.0.2",
+    "nodemon": "^1.11.0",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-dom": "^15.3.2"
@@ -18,6 +23,7 @@
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "nodemon": "^1.11.0",
     "webpack": "^1.13.2"
   }
 }

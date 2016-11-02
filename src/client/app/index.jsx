@@ -9,7 +9,7 @@ class App extends React.Component {
 	render(){
 		return (
 
-			<div>
+			<div className="text-center">
 				<h3>Sono l'app di Simone</h3>
 				<hr/>
 				<GridSima />

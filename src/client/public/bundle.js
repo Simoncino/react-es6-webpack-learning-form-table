@@ -83,7 +83,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'text-center' },
 					_react2.default.createElement(
 						'h3',
 						null,
@@ -22270,9 +22270,9 @@
 					nome: this.refs.nome.value,
 					razza: this.refs.razza.value,
 					classe: this.refs.classe.value,
-					attacco: Math.floor(Math.random() * 10 + 1),
-					difesa: Math.floor(Math.random() * 10 + 1),
-					vita: Math.floor(Math.random() * 10 + 1)
+					attacco: Math.floor(Math.random() * 6 + 1) + Math.floor(Math.random() * 6 + 1),
+					difesa: Math.floor(Math.random() * 6 + 1) + Math.floor(Math.random() * 6 + 1),
+					vita: Math.floor(Math.random() * 6 + 1) + Math.floor(Math.random() * 6 + 1)
 				};
 	
 				this.props.addHero(hero);
@@ -22289,6 +22289,11 @@
 				return _react2.default.createElement(
 					'div',
 					{ style: this.props.show ? displayBlock : displayNone },
+					_react2.default.createElement(
+						'h4',
+						null,
+						'Personaggio'
+					),
 					_react2.default.createElement(
 						'table',
 						{ style: styleTable },
