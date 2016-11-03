@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -d --progress --watch",
+    "bundle": "webpack -d --progress --watch",
     "start": "nodemon server.js"
   },
   "author": "Il Sima",

@@ -17,7 +17,7 @@ server.route({
     path:'/heroesArray', 
     handler: function (request, reply) {
         console.log('server.route /heroesArray');
-        return reply([{"nome":"porco", "cognome":"dio"}, {"nome":"madonna", "cognome":"cagna"}]);
+        return reply([{"nome":"Il Sima", "valore": Math.floor((Math.random() * 6) + 1)}, {"nome":"Annie", "valore": Math.floor((Math.random() * 6) + 1)}]);
     }
 });
 
