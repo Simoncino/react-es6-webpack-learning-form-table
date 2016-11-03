@@ -11,15 +11,15 @@ server.connection({
     port: 8000 
 });
 
-/*// Add the route
+// Add the route
 server.route({
     method: 'GET',
-    path:'/heroes', 
+    path:'/heroesArray', 
     handler: function (request, reply) {
-
-        return reply('hello world');
+        console.log('server.route /heroesArray');
+        return reply([{"nome":"porco", "cognome":"dio"}, {"nome":"madonna", "cognome":"cagna"}]);
     }
-});*/
+});
 
 server.register(require('inert'), (err) => {
 

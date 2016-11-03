@@ -57,7 +57,7 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 34);
 	
-	var _GridSima = __webpack_require__(/*! ./GridSima.jsx */ 172);
+	var _GridSima = __webpack_require__(/*! ./GridSima.jsx */ 197);
 	
 	var _GridSima2 = _interopRequireDefault(_GridSima);
 	
@@ -21981,7 +21981,32 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 172 */
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */
 /*!*************************************!*\
   !*** ./src/client/app/GridSima.jsx ***!
   \*************************************/
@@ -21999,7 +22024,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _AddHero = __webpack_require__(/*! ./AddHero.jsx */ 173);
+	var _AddHero = __webpack_require__(/*! ./AddHero.jsx */ 198);
 	
 	var _AddHero2 = _interopRequireDefault(_AddHero);
 	
@@ -22226,7 +22251,7 @@
 	exports.default = GridSima;
 
 /***/ },
-/* 173 */
+/* 198 */
 /*!************************************!*\
   !*** ./src/client/app/AddHero.jsx ***!
   \************************************/
