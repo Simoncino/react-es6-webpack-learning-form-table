@@ -11,6 +11,7 @@
   "author": "Il Sima",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.15.2",
     "hapi": "^15.2.0",
     "inert": "^4.0.2",
     "nodemon": "^1.11.0",
