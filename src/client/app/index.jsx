@@ -11,7 +11,8 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			axiosData : {"nome":"nessuno"}
+			axiosData : {"nome":"nessuno"},
+			axiosDataMongo : {"mongo":"niente"}
 		}
 	}
 
@@ -23,8 +24,18 @@ class App extends React.Component {
 		});  
 	}
 
+	loadDataMongo(){
+		var _this = this;
+		axios.get('/heroesMongoTest')
+		.then(function(response){
+			console.log('loadDataMongo() response', response);
+			_this.setState({axiosDataMongo:response.data});
+		});  
+	}
+
 	render(){
 		var axiosData = this.state.axiosData;
+		var axiosDataMongo = this.state.axiosDataMongo;
 	
 		return (
 
@@ -36,6 +47,8 @@ class App extends React.Component {
 				<button className="button round success small" onClick={this.loadData.bind(this)}>Load</button>
 				<pre>{JSON.stringify(axiosData)}</pre>
 				<hr/>
+				<button className="button round success small" onClick={this.loadDataMongo.bind(this)}>Load</button>
+				<pre>{JSON.stringify(axiosDataMongo)}</pre>
 			</div>
 
 			);

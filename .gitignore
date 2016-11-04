@@ -1,1 +1,8 @@
 node_modules
+src/client/public/bundle.js.map
+
+npm-debug.log
+
+src/client/public/bundle.js
+
+src/client/public/bundle.js
