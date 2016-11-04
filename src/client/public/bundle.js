@@ -82,7 +82,8 @@
 			var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
 			_this2.state = {
-				axiosData: { "nome": "nessuno" }
+				axiosData: { "nome": "nessuno" },
+				axiosDataMongo: { "mongo": "niente" }
 			};
 			return _this2;
 		}
@@ -96,9 +97,19 @@
 				});
 			}
 		}, {
+			key: 'loadDataMongo',
+			value: function loadDataMongo() {
+				var _this = this;
+				_axios2.default.get('/heroesMongoTest').then(function (response) {
+					console.log('loadDataMongo() response', response);
+					_this.setState({ axiosDataMongo: response.data });
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var axiosData = this.state.axiosData;
+				var axiosDataMongo = this.state.axiosDataMongo;
 	
 				return _react2.default.createElement(
 					'div',
@@ -121,7 +132,17 @@
 						null,
 						JSON.stringify(axiosData)
 					),
-					_react2.default.createElement('hr', null)
+					_react2.default.createElement('hr', null),
+					_react2.default.createElement(
+						'button',
+						{ className: 'button round success small', onClick: this.loadDataMongo.bind(this) },
+						'Load'
+					),
+					_react2.default.createElement(
+						'pre',
+						null,
+						JSON.stringify(axiosDataMongo)
+					)
 				);
 			}
 		}]);
